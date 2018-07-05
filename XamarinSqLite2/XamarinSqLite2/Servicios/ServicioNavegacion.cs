@@ -16,6 +16,7 @@ namespace XamarinSqLite2.Servicios
             { typeof(ListaTareasViewModel),  typeof(ListaTareasView) },
             { typeof(TareaViewModel),  typeof(TareaView) }
         };
+        //kike
 
         public static ServicioNavegacion Instancia
         {

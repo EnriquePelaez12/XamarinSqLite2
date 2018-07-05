@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinSqLite2.Views.ListaTareasView"
+             xmlns:templates="clr-namespace:XamarinSqLite2.Views.Templates;assembly=XamarinSqLite2"
+             BackgroundColor="Transparent"
+             Title="Lista Tareas">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Nueva Tarea"   
+            Command="{Binding NuevaTareaComando}">
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="nuevo"
+                    iOS="nuevo"    
+                    WinPhone="Assets/nuevo.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackLayout Padding ="0,0,0,0" Orientation ="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" >
+            <ActivityIndicator 
+                    IsVisible="{Binding HayOperacionesActivas}"
+                    IsRunning="{Binding HayOperacionesActivas}"
+                    Color="Black"/>
+        </StackLayout>
+
+        <StackLayout Padding ="0,0,0,0" Orientation ="Horizontal" Grid.Row="1" >
+            <Label Text="Mostrar Todas" VerticalOptions="Center"></Label>
+            <Switch IsToggled="{Binding MostrarTodas}" VerticalOptions="Center"></Switch>
+        </StackLayout>
+
+        <ListView Grid.Row="2"    
+            ItemsSource="{Binding Tareas}"
+            SelectedItem="{Binding TareaSeleccionada, Mode=TwoWay}" 
+            IsRefreshing="{Binding HayOperacionesActivas, Mode=OneWay}"
+            IsPullToRefreshEnabled="True"
+            HasUnevenRows="True"
+            SeparatorVisibility="None"
+            RefreshCommand="{Binding ActualizarComando}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <templates:FichaTareaTemplate/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinSqLite2.Views.Templates.FichaTareaTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="DescripcionStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="Margin" Value="5, 0" />
+            </Style>
+            <Style x:Key="CompletadaStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="Margin" Value="5, 0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Frame
+            OutlineColor="{StaticResource GrayColor}"
+            BackgroundColor="{StaticResource ColorSecundario}"
+            Margin="5">
+            <Frame.HasShadow>
+                <OnPlatform                       
+                    x:TypeArguments="x:Boolean"
+                    iOS="False"
+                    Android="True"
+                    WinPhone="False"/>
+            </Frame.HasShadow>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Ficha.Descripcion}" Style="{StaticResource DescripcionStyle}"/>
+
+                <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+                    <Label Text="Completada" Style="{StaticResource CompletadaStyle}" VerticalOptions="Center"/>
+                    <Switch IsToggled="{Binding Ficha.Completada,Mode=OneWay}"  VerticalOptions="Center"></Switch>
+                </StackLayout>
+
+                <StackLayout Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Orientation="Vertical">
+                    <Button Text="Finalizar" Command="{Binding FinalizarTareaComando}" ></Button>
+                    <Button Text="Ver" Command="{Binding MostrarTareaComando}" ></Button>
+                </StackLayout>
+
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

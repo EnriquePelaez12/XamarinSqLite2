@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinSqLite2.Views.TareaView">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Volver"   
+            Command="{Binding CancelarTareaComando}">
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="cancelar"
+                    iOS="cancelar"    
+                    WinPhone="Assets/cancelar.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Guardar"   
+            Command="{Binding GuardarTareaComando}">
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="guardar"
+                    iOS="guardar"    
+                    WinPhone="Assets/guardar.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Borrar"   
+            Command="{Binding BorrarTareaComando}">
+            <ToolbarItem.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    Android="borrar"
+                    iOS="borrar"    
+                    WinPhone="Assets/borrar.png"/>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView BackgroundColor="{StaticResource ColorSecundario}" Margin="5">
+        <StackLayout>
+            <Grid
+                Margin="6, 0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Padding ="0,0,0,0" Orientation ="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Grid.ColumnSpan="2">
+                    <ActivityIndicator 
+                        IsVisible="{Binding HayOperacionesActivas}"
+                        IsRunning="{Binding HayOperacionesActivas}"
+                        Color="Black"/>
+                </StackLayout>
+
+                <Label Text="Descripción" Grid.Column="0" Grid.Row="1" VerticalOptions="Center"></Label>
+                <Entry Placeholder="Tarea a realizar" Text="{Binding Ficha.Descripcion, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"></Entry>
+
+                <Label Text="Completada" Grid.Column="0" Grid.Row="2" VerticalOptions="Center"></Label>
+                <Switch IsToggled="{Binding Ficha.Completada,Mode=TwoWay}" Grid.Column="1" Grid.Row="2"></Switch>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
